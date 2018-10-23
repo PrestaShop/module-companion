@@ -8,11 +8,11 @@ assert_exists() {
 }
 
 scripts="./scripts"
-install_module="$scripts/install_module"
-install="$scripts/install"
-install_webserver="$scripts/install_webserver"
 move_module="$scripts/move_module"
-
+clone="$scripts/clone"
+install_webserver="$scripts/install_webserver"
+install="$scripts/install"
+install_module="$scripts/install_module"
 
 setup() {
   export TMP_DIRECTORY="$(mktemp -d)"
@@ -27,7 +27,7 @@ teardown() {
 }
 
 @test "PrestaShop cloning should works" {
-    run $install $TMP_DIRECTORY 1.7.4.x
+    run $clone $TMP_DIRECTORY 1.7.4.x
 
     assert_success
     assert_exists "$TMP_DIRECTORY/README.md"
@@ -36,8 +36,7 @@ teardown() {
 
 @test "PrestaShop installation should works" {
     git clone https://github.com/PrestaShop/PrestaShop $TMP_DIRECTORY
-    run cd $TMP_DIRECTORY
-    run $start
+    run $install $TMP_DIRECTORY
 
     assert_success
     assert_exists "$TMP_DIRECTORY/vendor/autoload.php"

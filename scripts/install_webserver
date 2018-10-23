@@ -1,7 +1,16 @@
 #!/bin/bash
 
-echo Install WebServer
+if [ $# -ne 1 ]; then
+    echo "presto-companion Webserver Installer"
+    echo "use: ./install_webserver prestashop_path"
+    exit 1
+fi
+
+PRESTASHOP_LOCATION=$1
+
+echo Install WebServer located at $PRESTASHOP_LOCATION
 
 # Apache & php-fpm configuration
+cd $PRESTASHOP_LOCATION
 bash travis-scripts/setup-php-fpm.sh
 bash travis-scripts/setup-apache.sh
