@@ -20,7 +20,7 @@ Look at the test suite and at `dist` folder for use of these scripts.
 
 ## Contributions?
 
-Yes, I'd like to have distribution files for Gitlab CI and AppVeyor CI if possible. Anyway, you're welcome here if you're here to contribute.
+Yes, I'd like to have distribution files for Gitlab CI and AppVeyor CI if possible. Anyway, you're welcome if you're here to contribute.
 
 ## Questions/Issues?
 
