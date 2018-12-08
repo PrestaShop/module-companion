@@ -23,5 +23,5 @@ rm -Rf $PRESTASHOP_PATH/modules/$MODULE_NAME/*
 cp -Rf $MODULE_PATH/*  $PRESTASHOP_PATH/modules/$MODULE_NAME/
 
 # Enable the Module
+cd $PRESTASHOP_PATH
 php bin/console prestashop:module install $MODULE_NAME
-
