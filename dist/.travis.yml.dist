@@ -41,7 +41,7 @@ before_script:
     - ./scripts/move_module $TRAVIS_BUILD_DIR $MODULE_SCRIPTS_DIR
     - $MODULE_SCRIPTS_DIR/clone $TRAVIS_BUILD_DIR $PS_VERSION
     - $MODULE_SCRIPTS_DIR/install $TRAVIS_BUILD_DIR
-    - $MODULE_SCRIPTS_DIR/install_webserver
+    - $MODULE_SCRIPTS_DIR/install_webserver $TRAVIS_BUILD_DIR
     - $MODULE_SCRIPTS_DIR/start $TRAVIS_BUILD_DIR
     - $MODULE_SCRIPTS_DIR/install_module $MODULE_SCRIPTS_DIR $TRAVIS_BUILD_DIR gamification
     
