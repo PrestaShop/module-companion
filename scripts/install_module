@@ -20,7 +20,7 @@ composer update --prefer-dist --no-interaction --no-progress
 echo Move Module Contents to Prestashop Modules Directory
 
 rm -Rf $PRESTASHOP_PATH/modules/$MODULE_NAME/*
-cp -Rf $MODULE_PATH/*  $PRESTASHOP_PATH/modules/$1/
+cp -Rf $MODULE_PATH/*  $PRESTASHOP_PATH/modules/$MODULE_NAME/
 
 # Enable the Module
 php bin/console prestashop:module install $MODULE_NAME
