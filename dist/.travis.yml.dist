@@ -25,8 +25,10 @@ env:
     global:
         - SYMFONY_DEPRECATIONS_HELPER=disabled
         - SYMFONY_PHPUNIT_VERSION=5.7
-        - MODULE_DIR=/tmp/gamification
-        - MODULE_SCRIPTS_DIR=/tmp/gamification/tools
+        - MODULE=your-module
+        - MODULE_DIR=/tmp/$MODULE
+        - COMPANION_DIR=/tmp/companion
+        - COMPANION_DIR_SCRIPTS=/tmp/companion/scripts
 
     matrix:
         - PS_VERSION=1.7.4.x
@@ -38,14 +40,15 @@ env:
     fast_finish: true        
 
 before_script:
-    - ./scripts/move_module $TRAVIS_BUILD_DIR $MODULE_SCRIPTS_DIR
-    - $MODULE_SCRIPTS_DIR/clone $TRAVIS_BUILD_DIR $PS_VERSION
-    - $MODULE_SCRIPTS_DIR/install $TRAVIS_BUILD_DIR
-    - $MODULE_SCRIPTS_DIR/install_webserver $TRAVIS_BUILD_DIR
-    - $MODULE_SCRIPTS_DIR/install_module $MODULE_SCRIPTS_DIR $TRAVIS_BUILD_DIR gamification
-    
+    - git clone https://github.com/PrestaShop/module-companion.git $COMPANION_DIR
+    - $COMPANION_DIR_SCRIPTS/move_module $TRAVIS_BUILD_DIR $MODULE_DIR
+    - $COMPANION_DIR_SCRIPTS/clone $TRAVIS_BUILD_DIR $PS_VERSION
+    - $COMPANION_DIR_SCRIPTS/install $TRAVIS_BUILD_DIR
+    - $COMPANION_DIR_SCRIPTS/install_webserver $TRAVIS_BUILD_DIR
+
 script: 
-    - cd $TRAVIS_BUILD_DIR/modules/gamification
+    - $COMPANION_DIR_SCRIPTS/install_module $MODULE_DIR $TRAVIS_BUILD_DIR $MODULE
+    - cd $TRAVIS_BUILD_DIR/modules/$MODULE
     - composer cs-fix-test
     - composer test
         
